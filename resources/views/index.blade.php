@@ -199,7 +199,7 @@
             },
             abrirProyecto(proyecto)
             {
-                window.location.href = proyecto + '.uttics.com';
+                window.location.href = 'http://'proyecto + '.uttics.com';
             }
         },
         delimiters:['${','}']
