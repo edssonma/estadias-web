@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>UTTICS</title>
 
@@ -73,15 +74,15 @@
 
     </div>
   </header>
-
+  <div id="app"></div>
   <!-- Portfolio Section -->
+  <div id="indexPage"  v-loading="loading">
   <section class="page-section portfolio" id="portfolio" style="background-color: #f2f2f2;">
     <div class="container">
 
       <!-- Portfolio Section Heading -->
       <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Proyectos</h2>
 
-      <div id="indexPage"  v-loading="loading">
         <section id="team" class="pb-5">
                 <div class="container">
                     <div class="row">
@@ -137,10 +138,10 @@
                     </div>
                 </div>
             </section>
-   </div>
-
-    </div>
-  </section>
+            
+          </div>
+        </section>
+  </div>
 
   <!-- Copyright Section -->
   <section class="copyright py-4 text-center text-white">
@@ -157,9 +158,8 @@
   </div>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="{{ asset('') }}/js/app.js"></script>
+
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -199,7 +199,7 @@
             },
             abrirProyecto(proyecto)
             {
-                window.location.href = proyecto + '.uttics.com';
+                window.location.href = 'http://' + proyecto + '.uttics.com';
             }
         },
         delimiters:['${','}']

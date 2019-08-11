@@ -15,14 +15,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/login', function () {
-    return view('login.login');
-});
-
 Route::post('getProjects','IndexController@getProjects');
 
 Route::middleware(['authentication'])->group(function () {
-    Route::get('home', function(){return view('content.home');});
 
     Route::get('createAccountView', 'Accounts\AccountsController@createAccountView');
     Route::post('registerNewAccount','Accounts\AccountsController@registerNewAccount');
@@ -32,10 +27,6 @@ Route::middleware(['authentication'])->group(function () {
     Route::post('deleteAccount','Accounts\AccountsController@deleteAccount');
 });
 
-// Route::prefix('account')->group(function () {
-//     Route::prefix('views')->group(function () {
-//     });
-//     Route::prefix('methods')->group(function () {
-//         Route::get('saveNewAccount', 'Accounts\AccountsController@saveNewAccount');
-//     });
-// });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

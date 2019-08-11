@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -35,5 +38,24 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        $user = User::where('email', $credentials['email'])->where('password', $credentials['password'])->first();
+        if($user){
+            if (Auth::loginUsingId($user->id, true)) {
+                // dd(Auth::user());
+                return redirect()->intended('/home');
+            }
+        }
+        return back()->with('error', 'Usuario no encontrado');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->intended('/');
     }
 }

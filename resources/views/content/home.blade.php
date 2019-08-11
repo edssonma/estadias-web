@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -47,9 +47,9 @@
   </head>
 
   <body>
-    <div id="app">
-
-      <!-- ########## START: LEFT PANEL ########## -->
+    
+    <!-- ########## START: LEFT PANEL ########## -->
+      <div id="app">
       <div class="br-logo"><a href=""><span></span>UTTICS<span></span></a></div>
       
       @section('menu')
@@ -68,7 +68,7 @@
     @section('scripts')
     @show
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script> --}}
-    <script src="{{ asset('') }}/js/app.js"></script>
+    <script src="{{ URL::asset('/js/app.js') }}"></script>
     <script src="https://kit.fontawesome.com/10d46139ed.js"></script>
     <script src="../lib/jquery/jquery.js"></script>
     <script src="../lib/popper.js/popper.js"></script>

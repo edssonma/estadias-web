@@ -18,7 +18,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
       <div class="tab-pane pos-absolute a-0 mg-t-60 overflow-y-auto active" id="contacts" role="tabpanel">
-        <label class="sidebar-label pd-x-25 mg-t-25">Online Contacts</label>
+        <label class="sidebar-label pd-x-25 mg-t-25">Información de sesión</label>
         <div class="contact-list pd-x-10">
           <a href="" class="contact-list-link new">
             <div class="d-flex">
@@ -27,90 +27,20 @@
                 <div class="contact-status-indicator bg-success"></div>
               </div>
               <div class="contact-person">
-                <p class="mg-b-0">Marilyn Tarter</p>
-                <span class="tx-12 op-5 d-inline-block">Clemson, CA</span>
+                <p class="mg-b-0">{{ Auth::user()->nombre}}</p>
+                <span class="tx-12 op-5 d-inline-block">{{ Auth::user()->apellido_paterno . ' ' . Auth::user()->apellido_materno}}</span>
               </div>
-              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 1 new</span>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0 ">Belinda Connor</p>
-                <span class="tx-12 op-5 d-inline-block">Fort Kent, ME</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link new">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Britanny Cevallos</p>
-                <span class="tx-12 op-5 d-inline-block">Shiboygan Falls, WI</span>
-              </div>
-              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 3 new</span>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link new">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Brandon Lawrence</p>
-                <span class="tx-12 op-5 d-inline-block">Snohomish, WA</span>
-              </div>
-              <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 1 new</span>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Andrew Wiggins</p>
-                <span class="tx-12 op-5 d-inline-block">Springfield, MA</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Theodore Gristen</p>
-                <span class="tx-12 op-5 d-inline-block">Nashville, TN</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-success"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Deborah Miner</p>
-                <span class="tx-12 op-5 d-inline-block">North Shore, CA</span>
-              </div>
+              <form action="logout" method="post">
+                  {{ csrf_field() }}
+                  <button type="submit" class="btn btn-danger" style="cursor:pointer;"><i class="fas fa-sign-out-alt"></i></button>
+              </form>
+              {{-- <span class="tx-info tx-12"><span class="square-8 bg-info rounded-circle"></span> 1 new</span> --}}
             </div><!-- d-flex -->
           </a><!-- contact-list-link -->
         </div><!-- contact-list -->
 
 
-        <label class="sidebar-label pd-x-25 mg-t-25">Offline Contacts</label>
+        {{-- <label class="sidebar-label pd-x-25 mg-t-25">Offline Contacts</label>
         <div class="contact-list pd-x-10">
           <a href="" class="contact-list-link">
             <div class="d-flex">
@@ -196,7 +126,7 @@
               </div>
             </div><!-- d-flex -->
           </a><!-- contact-list-link -->
-        </div><!-- contact-list -->
+        </div><!-- contact-list --> --}}
 
       </div><!-- #contacts -->
 
