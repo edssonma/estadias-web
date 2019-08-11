@@ -13,7 +13,7 @@
         </div><!-- br-header-left -->
         <div class="br-header-right">
           <nav class="nav">
-            <div class="dropdown">
+            {{-- <div class="dropdown">
               <a href="" class="nav-link pd-x-7 pos-relative" data-toggle="dropdown">
                 <i class="icon ion-ios-email-outline tx-24"></i>
                 <!-- start: if statement -->
@@ -100,9 +100,9 @@
                 </div><!-- media-list -->
               </div><!-- dropdown-menu -->
               
-            </div><!-- dropdown -->
+            </div><!-- dropdown --> --}}
             <!----NOTIFICACIONES-------------------------------------------------------------------------------------------------------------->
-            <div class="dropdown">
+            {{-- <div class="dropdown">
               <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
                 <span class="logged-name hidden-md-down">Usuario</span>
                 <img src="http://via.placeholder.com/64x64" class="wd-32 rounded-circle" alt="">
@@ -115,14 +115,14 @@
                   <li><a href=""><i class="icon ion-power"></i> Salir</a></li>
                 </ul>
               </div><!-- dropdown-menu -->
-            </div><!-- dropdown -->
+            </div><!-- dropdown --> --}}
             <!----USUARIO LOGEADO-------------------------------------------------------------------------------------------------------------->
           </nav>
           <div class="navicon-right">
             <a id="btnRightMenu" href="" class="pos-relative">
-              <i class="icon ion-ios-chatboxes-outline"></i>
+                <i class="fas fa-user-circle"></i>
               <!-- start: if statement -->
-              <span class="square-8 bg-danger pos-absolute t-10 r--5 rounded-circle"></span>
+              {{-- <span class="square-8 bg-danger pos-absolute t-10 r--5 rounded-circle"></span> --}}
               <!-- end: if statement -->
             </a>
           </div><!-- navicon-right -->
