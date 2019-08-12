@@ -17,14 +17,23 @@ Route::get('/', function () {
 
 Route::post('getProjects','IndexController@getProjects');
 
-Route::middleware(['authentication'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
+    //Accounts
     Route::get('createAccountView', 'Accounts\AccountsController@createAccountView');
     Route::post('registerNewAccount','Accounts\AccountsController@registerNewAccount');
+    Route::post('registerNewServerAccount','Accounts\AccountsController@registerNewServerAccount');
     Route::post('registerAccountsFromExcel','Accounts\AccountsController@registerAccountsFromExcel');
-
     Route::get('deleteAccountView','Accounts\AccountsController@deleteAccountView');
     Route::post('deleteAccount','Accounts\AccountsController@deleteAccount');
+    //Accounts-End
+
+    //Databases
+    Route::get('databasesView', 'Databases\DatabasesController@databasesView');
+    Route::get('getUsers/{user}','Databases\DatabasesController@getUsers');
+    Route::get('getDatabases/{user}','Databases\DatabasesController@getDatabases');
+    //Databases-End
+
 });
 
 Auth::routes();

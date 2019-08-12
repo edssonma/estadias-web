@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imports\AccountsImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Api\ApiController;
+use App\User;
+use DB;
 
 class AccountsController extends Controller
 {
@@ -23,9 +26,7 @@ class AccountsController extends Controller
     {
         $params = (object)$request->get('data');
 
-        $data = array(
-            'key' => 'N3Kusp5VuL1ww3JuL9ZGBrb4MnsF4dKEGcvsZxZZwCdyo',
-            'action'=>'add', 
+        $data = [
             'domain'=>$params->domain, 
             'user'=>$params->user, 
             'pass'=>$params->pass, 
@@ -34,24 +35,11 @@ class AccountsController extends Controller
             'inode'=>$params->inode,
             'limit_nproc'=>$params->limit_nproc,
             'limit_nofile'=>$params->limit_nofile,
-            'server_ips'=>'187.188.191.103');
+            'server_ips'=>'187.188.191.103'];
 
-        $url = "https://uttics.com:2304/v1/account";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt ($ch, CURLOPT_POST, 1);
-        $response = curl_exec($ch);
-        $curl_info = curl_getinfo($ch);
-        $err = curl_error($ch);
-        curl_close($ch);
+       $response = ApiController::ApiConnect('account', 'add', $data);
 
-
-        return response()->json(json_decode($response));
+        return response()->json(json_decode($response['response']));
     }
 
     public function registerAccountsFromExcel(Request $request)
@@ -66,8 +54,6 @@ class AccountsController extends Controller
             if($collection[$key][0] != null && $collection[$key][0] != "")
             {
                 $data = array(
-                    'key' => 'N3Kusp5VuL1ww3JuL9ZGBrb4MnsF4dKEGcvsZxZZwCdyo',
-                    'action'=>'add', 
                     'domain'=>$collection[$key][0], 
                     'user'=>$collection[$key][1], 
                     'pass'=>$collection[$key][2], 
@@ -78,23 +64,11 @@ class AccountsController extends Controller
                     'limit_nofile'=>$collection[$key][7],
                     'server_ips'=>'187.188.191.103');
         
-                $url = "https://uttics.com:2304/v1/account";
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $url);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-                curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-                curl_setopt ($ch, CURLOPT_POST, 1);
-                $response = curl_exec($ch);
-                $curl_info = curl_getinfo($ch);
-                $err = curl_error($ch);
-                curl_close($ch);
+                $response = ApiController::ApiConnect('account', 'add', $data);
     
                 $responses->push([
                     'user' => $collection[$key][1],
-                    'response' => json_decode($response)
+                    'response' => json_decode($response['response'])
                 ]);
             }
         }
@@ -112,27 +86,46 @@ class AccountsController extends Controller
         foreach ($usersToDelete as $key => $value) {
 
             $data = array(
-                'key' => 'N3Kusp5VuL1ww3JuL9ZGBrb4MnsF4dKEGcvsZxZZwCdyo',
-                'action'=>'del',
                 'user'=> $value);
-    
-            $url = "https://uttics.com:2304/v1/account";
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-            curl_setopt ($ch, CURLOPT_POST, 1);
-            $response = curl_exec($ch);
-            $curl_info = curl_getinfo($ch);
-            $err = curl_error($ch);
-            curl_close($ch);    
+
+            $response = ApiController::ApiConnect('account', 'del', $data); 
         }
         
 
-        return response()->json(json_decode($response));
+        return response()->json(json_decode($response['response']));
 
+    }
+
+    //----------------------------------server-------------------------------------------
+
+    public function registerNewServerAccount(Request $request)
+    {
+        $data = $request->get('data');
+        $user = new User($data);
+
+        DB::beginTransaction();
+        try {
+
+            if($user->save())
+            {
+                DB::commit();
+                return response()->json([
+                    'status' => 'OK',
+                    'msj' => 'Usuario creado exitósamente'
+                ]);
+            }
+            return response()->json([
+                'status' => 'Error',
+                'msj' => 'Ha ocurrido un error'
+            ]);
+
+    
+        } catch (\Illuminate\Database\QueryException $ex) {
+                DB::rollback();
+                    return response()->json([
+                        'status' => 'Error',
+                        'msj' => $ex->getMessage()
+                    ]);
+        }
     }
 }

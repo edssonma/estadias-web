@@ -9,6 +9,12 @@
                     <span class="menu-item-label">Inicio</span>
                     </div><!-- menu-item -->
                 </a><!-- br-menu-link -->
+                <a href="databasesView" :class="[ activeitem == 'databases' ? 'active' : '' , 'br-menu-link']">
+                    <div class="br-menu-item">
+                    <i class="menu-item-icon fas fa-database tx-22"></i>
+                    <span class="menu-item-label">Bases de datos</span>
+                    </div><!-- menu-item -->
+                </a><!-- br-menu-link -->
                 <a href="#"  :class="[ activeitem == 'cuentas' ? 'active' : '' , 'br-menu-link']">
                     <div class="br-menu-item">
                     <i class="menu-item-icon icon ion-person-add tx-24"></i>
