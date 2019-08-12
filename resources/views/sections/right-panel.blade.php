@@ -27,8 +27,17 @@
                 <div class="contact-status-indicator bg-success"></div>
               </div>
               <div class="contact-person">
-                <p class="mg-b-0">{{ Auth::user()->nombre}}</p>
-                <span class="tx-12 op-5 d-inline-block">{{ Auth::user()->apellido_paterno . ' ' . Auth::user()->apellido_materno}}</span>
+                <p class="mg-b-0">{{ Auth::user()->nombre . ' ' . Auth::user()->apellido_paterno}}</p>
+                @switch(Auth::user()->role_id)
+                    @case(1)
+                      <span class="tx-12 op-5 d-inline-block">Administrador</span>  
+                        @break
+                    @case(2)
+                      <span class="tx-12 op-5 d-inline-block">PTC</span>  
+                        @break
+                    @default
+                        
+                @endswitch
               </div>
               <form action="logout" method="post">
                   {{ csrf_field() }}
@@ -38,96 +47,6 @@
             </div><!-- d-flex -->
           </a><!-- contact-list-link -->
         </div><!-- contact-list -->
-
-
-        {{-- <label class="sidebar-label pd-x-25 mg-t-25">Offline Contacts</label>
-        <div class="contact-list pd-x-10">
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Marilyn Tarter</p>
-                <span class="tx-12 op-5 d-inline-block">Clemson, CA</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="mg-l-10">
-                <p class="mg-b-0">Belinda Connor</p>
-                <span class="tx-12 op-5 d-inline-block">Fort Kent, ME</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Britanny Cevallos</p>
-                <span class="tx-12 op-5 d-inline-block">Shiboygan Falls, WI</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Brandon Lawrence</p>
-                <span class="tx-12 op-5 d-inline-block">Snohomish, WA</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Andrew Wiggins</p>
-                <span class="tx-12 op-5 d-inline-block">Springfield, MA</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Theodore Gristen</p>
-                <span class="tx-12 op-5 d-inline-block">Nashville, TN</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-          <a href="" class="contact-list-link">
-            <div class="d-flex">
-              <div class="pos-relative">
-                <img src="http://via.placeholder.com/280x280" class="wd-40 rounded-circle" alt="">
-                <div class="contact-status-indicator bg-gray-500"></div>
-              </div>
-              <div class="contact-person">
-                <p class="mg-b-0">Deborah Miner</p>
-                <span class="tx-12 op-5 d-inline-block">North Shore, CA</span>
-              </div>
-            </div><!-- d-flex -->
-          </a><!-- contact-list-link -->
-        </div><!-- contact-list --> --}}
-
       </div><!-- #contacts -->
 
 

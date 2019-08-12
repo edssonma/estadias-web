@@ -2,14 +2,20 @@
     <div class="form-layout form-layout-6" v-loading="loadingForm" :element-loading-text="loadingtext">
         <div class="row no-gutters" v-for="field in fields" :key="field.field.name">
             <div class="col-5 col-sm-4">
-                {{field.field.name}}
+                {{field.name}}
             </div>
             <div class="col-7 col-sm-8">
                 <input 
+                    v-show="field.type != 'select'"
                     class="form-control" 
                     :type="field.type"  
                     :placeholder="field.placeholder" 
                     v-model="field.field.value">
+
+                <select v-show="field.type == 'select'" class="form-control select2" :data-placeholder="field.placeholder" v-model="field.field.value">
+                    <option v-for="option in field.options" :key="option.name" :value="option.value">{{ option.name}}</option>
+                </select>
+
             </div>
         </div>                  
         <button 
@@ -28,6 +34,9 @@ Vue.use(ElementUI, { locale });
 
 //--------------------------------------------------------------------->
 import newAccountFields from "../../fields/newAccount.js";
+import newServerAccountFields from "../../fields/newServerAccount.js";
+
+
 //Importar aqui nuevos campos para otros tipos de formulario de registro
 
 export default {
@@ -50,6 +59,9 @@ export default {
         switch (this.fieldsname) {
             case 'newAccountFields':
                 this.fields = newAccountFields;
+                break;
+            case 'newServerAccountFields':
+                this.fields = newServerAccountFields;
                 break;
             //Añadir otros cases para otros tipos de formulario de registro
         }

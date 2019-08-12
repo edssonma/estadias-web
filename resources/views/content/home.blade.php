@@ -51,7 +51,6 @@
     <!-- ########## START: LEFT PANEL ########## -->
       <div id="app">
       <div class="br-logo"><a href=""><span></span>UTTICS<span></span></a></div>
-      
       @section('menu')
         <main-menu activeitem="inicio"></main-menu>
       @show

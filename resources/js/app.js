@@ -28,9 +28,16 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 /** COMPONENTES PROPIOS */
 Vue.component('main-menu', require('./components/sections/menu.vue').default);
 Vue.component('main-footer', require('./components/sections/footer.vue').default);
+
+Vue.component('excel-accounts-modal', require('./components/excel/excel-accounts.vue').default);
+
 Vue.component('register-form', require('./components/misc/register-form.vue').default);
 Vue.component('delete-account', require('./components/misc/delete-account.vue').default);
-Vue.component('excel-accounts-modal', require('./components/excel/excel-accounts.vue').default);
+Vue.component('dbinfo-card', require('./components/misc/dbinfo-card.vue').default);
+Vue.component('databases-module', require('./components/misc/databases.vue').default);
+Vue.component('db-users', require('./components/misc/db-users.vue').default);
+
+
 
 
 
